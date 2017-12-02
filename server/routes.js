@@ -150,7 +150,8 @@ module.exports.Search = function (req, res) {
             { 'mySkills.Name': { '$regex': req.body.searchString, '$options': 'i' } },
             { 'mySkills.Description': { '$regex': req.body.searchString, '$options': 'i' } },
             { 'phoneNumber': { '$regex': req.body.searchString, '$options': 'i' } },
-            { 'local.email': { '$regex': req.body.searchString, '$options': 'i' } }]
+            { 'local.email': { '$regex': req.body.searchString, '$options': 'i' } }],
+        $and: [{ 'token': { $ne: currentUserToken } }]
     };
 
     // Yeah I had to borrow Somto's crappy code 😒
